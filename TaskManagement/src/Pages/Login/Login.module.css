@@ -1,0 +1,33 @@
+.loginContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fdf8f5;
+  position: relative;
+  overflow: hidden;
+  padding: 0px 0px 0px 5rem;
+}
+
+.loginContainer::before {
+  content: "";
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: rgba(193, 135, 255, 0.2); /* Light purple */
+  border-radius: 50%;
+  top: -200px;
+  left: -200px;
+}
+
+.loginContainer::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: rgba(255, 105, 180, 0.2); /* Light pink */
+  border-radius: 50%;
+  bottom: -150px;
+  right: -150px;
+}

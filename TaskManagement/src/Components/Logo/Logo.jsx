@@ -5,7 +5,11 @@ import { Box, Typography } from "@mui/material";
 const Logo = ({ useIn }) => {
   return (
     <Box
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        justifyContent: useIn === "login" ? "center" : "start",
+        alignItems: "center",
+      }}
     >
       <AssignmentOutlinedIcon
         sx={{
@@ -20,7 +24,10 @@ const Logo = ({ useIn }) => {
         sx={{
           fontWeight: useIn === "login" ? 700 : 600,
           color: useIn === "login" ? "#7B1984" : "inherit",
-          fontFamily: '"Mulish", sans-serif',
+          fontFamily:
+            useIn === "login"
+              ? '"Urbanist", sans-serif'
+              : '"Mulish", sans-serif',
           fontSize: useIn === "login" ? "26.19px" : "24px",
         }}
       >

@@ -3,7 +3,7 @@ import Header from "../Components/Header/Header";
 import { Outlet } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Login from "../Pages/Login/Login";
-import FilterBy from "../Components/FilterBy/FilterBy";
+import FilterSection from "../Components/FilterSection/FilterSection";
 
 const Layout = () => {
   const { isAuthenticated } = useAuth0();
@@ -12,7 +12,7 @@ const Layout = () => {
       {isAuthenticated ? (
         <>
           <Header />
-          <FilterBy/>
+          <FilterSection/>
           <Outlet />
         </>
       ) : (
