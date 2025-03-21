@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 // import Styles from "./AccordionBox.module.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   Typography,
 } from "@mui/material";
+import AddTaskButton from "../AddTaskButton/AddTaskButton";
 
 const AccordionBox = ({ item }) => {
-  
   const [expanded, setExpanded] = useState(item.id !== "completed");
   const handleToggle = () => {
     setExpanded((prev) => !prev);
@@ -68,7 +70,9 @@ const AccordionBox = ({ item }) => {
           borderBottomLeftRadius: "12px",
           borderBottomRightRadius: "12px",
         }}
-      ></AccordionDetails>
+      >
+        {item.id === "todo" && <AddTaskButton/>}
+      </AccordionDetails>
     </Accordion>
   );
 };

@@ -1,11 +1,11 @@
 import { Box, Grid } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 import AccordionBox from "../AccordionBox/AccordionBox";
-import { DataContext } from "../../App";
 import BoardCard from "../TaskBoardCard/BoardCard";
+import { useSelector } from "react-redux";
 
 const TaskCategory = () => {
-  const { tabValue } = useContext(DataContext);
+  const  tabValue = useSelector((state)=>state.tab);
   const taskTypes = [
     { label: "Todo", id: "todo", color: "#FAC3FF" },
     { label: "In-Progress", id: "progress", color: "#85D9F1" },
@@ -31,7 +31,7 @@ const TaskCategory = () => {
           {taskTypes.map((item) => (
             <Grid item xs={12} sm={12} md={12} key={item.id}>
               <AccordionBox item={item} />
-            </Grid>
+            </Grid> 
           ))}
         </Grid>
       )}

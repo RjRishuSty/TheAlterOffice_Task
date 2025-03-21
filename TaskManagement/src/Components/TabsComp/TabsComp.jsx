@@ -1,12 +1,15 @@
 import { Box, Tab, Tabs } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React from "react";
 import ReorderOutlinedIcon from "@mui/icons-material/ReorderOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
-import { DataContext } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
+import { TabChange } from "../../Redux/Slices/TabSlice";
 
 const TabsComp = () => {
-  const { tabValue, setTabValue } = useContext(DataContext);
-  console.log(tabValue,"Tab Page");
+  const dispatch = useDispatch();
+  const tabValue = useSelector((state)=>state.tab);
+  // console.log("TabCompFile",tabValue);
+
   const tabLabel = [
     {
       label: "List",
@@ -21,7 +24,7 @@ const TabsComp = () => {
   ];
 
   const handleChange = (event, newValue) => {
-    setTabValue(newValue);
+    dispatch(TabChange(newValue));
   };
   return (
     <Box sx={{ width: "100%" }}>

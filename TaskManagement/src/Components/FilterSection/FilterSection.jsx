@@ -1,7 +1,8 @@
-import { Box, Button, Stack } from "@mui/material";
+import { Box,Stack } from "@mui/material";
 import React from "react";
 import Search from "../Search/Search";
 import FilterByBtn from "./FilterByBtn";
+import AddTaskButton from "../AddTaskButton/AddTaskButton";
 
 const FilterSection = () => {
   return (
@@ -35,20 +36,7 @@ const FilterSection = () => {
         }}
       >
         <Search />
-        <Button
-          variant="contained"
-          sx={{
-            width: "152px",
-            height: "48px",
-            backgroundColor: "#7B1984",
-            borderRadius: "41px",
-            color: "#ffff",
-            fontWeight: 700,
-            fontSize: "14px",
-          }}
-        >
-          Add Task
-        </Button>
+        <AddTaskButton useIn="filterHeader"/>
       </Box>
     </Stack>
   );

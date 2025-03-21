@@ -5,6 +5,7 @@ import Styles from "./Login.module.css";
 import LoginByGoogle from "../../Components/LoginByGoogle/LoginByGoogle";
 
 const Login = () => {
+
   return (
     <Stack className={Styles.loginContainer}>
       <Grid container>
@@ -19,7 +20,7 @@ const Login = () => {
             justifyContent: "center",
             alignItems: "start",
             flexDirection: "column",
-            padding:'10px 15px'
+            padding: "10px 15px",
           }}
         >
           <Logo useIn="login" />
@@ -34,7 +35,7 @@ const Login = () => {
             Streamline your workflow and track progress effortlessly with our
             all-in-one task management app.
           </Typography>
-          <LoginByGoogle/>
+          <LoginByGoogle />
         </Grid>
         <Grid
           item

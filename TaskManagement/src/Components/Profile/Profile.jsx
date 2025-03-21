@@ -1,12 +1,28 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import React, { useState } from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Styles from "./Profile.module.css";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { getAuth, signOut } from "firebase/auth";
+import { firebaseApp } from "../../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../Redux/Slices/UserSlice";
+
+const auth = getAuth(firebaseApp);
 
 const Profile = () => {
-  const { user, logout } = useAuth0();
+  const user = useSelector((state) => state.user);
+  // console.log("Profile FIle:", user);
+  const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      dispatch(userLogout());
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Stack sx={{ flexGrow: 0 }}>
@@ -16,13 +32,13 @@ const Profile = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            cursor:'pointer'
+            cursor: "pointer",
           }}
           onClick={() => setIsHovered(!isHovered)}
         >
           <img
-            src={user.picture}
-            alt={user.name}
+            src={user?.photoURL}
+            alt={user?.displayName}
             className={Styles.userImg}
             sx={{ mr: 1 }}
           />
@@ -33,7 +49,7 @@ const Profile = () => {
               ml: 1,
             }}
           >
-            {user.given_name}
+            {user?.displayName}
           </Typography>
         </Box>
         {isHovered && (
@@ -52,9 +68,7 @@ const Profile = () => {
               backgroundColor: "#FFF9F9",
               border: "1px solid #7B198426",
             }}
-            onClick={() =>
-              logout({ logoutParams: { returnTo: window.location.origin } })
-            }
+            onClick={handleLogout}
           >
             Logout
           </Button>

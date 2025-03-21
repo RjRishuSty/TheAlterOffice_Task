@@ -1,15 +1,13 @@
 import { Box, Stack } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 import TaskHeader from "../../Components/TaskHeader/TaskHeader";
-import { useAuth0 } from "@auth0/auth0-react";
 import TaskCategory from "../../Components/TaskCategory/TaskCategory";
-import { DataContext } from "../../App";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-  const { tabValue } = useContext(DataContext);
-  const { isAuthenticated } = useAuth0();
+  const tabValue = useSelector((state)=>state.tab);
 
-  return isAuthenticated ? (
+  return (
     <Stack sx={{ padding: "0rem 1.9rem 3rem 1.9rem" }}>
       {tabValue !== "board" && (
         <Box
@@ -36,7 +34,7 @@ const Home = () => {
         <TaskCategory />
       </Box>
     </Stack>
-  ) : null;
+  );
 };
 
 export default Home;
