@@ -1,0 +1,19 @@
+.input {
+  border: 1px solid #00000021 !important;
+  width: 100% !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #1e212a !important;
+  border-radius: 8px !important;
+  background-color: #f1f1f15c !important;
+}
+.optionBtn{
+    width: auto;
+    height: 30px !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    border-radius: 41px !important;
+    text-transform: capitalize;
+    background-color: #FFFFFF !important;
+    border: 1px solid #00000030 !important;
+}

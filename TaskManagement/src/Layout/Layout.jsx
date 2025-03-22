@@ -11,7 +11,7 @@ const Layout = () => {
 
   return (
     <>
-      {user ? (
+      {!user ? (
         <>
           <Header />
           <FilterSection />

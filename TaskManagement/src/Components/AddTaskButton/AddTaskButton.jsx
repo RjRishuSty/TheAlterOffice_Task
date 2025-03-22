@@ -1,13 +1,23 @@
 import React from "react";
 import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { openTaskForm } from "../../Redux/Slices/TaskFormSlice";
+import Modal from "../Modal/Modal";
 
 const AddTaskButton = ({ useIn }) => {
+  const { open, component } = useSelector((state) => state.taskForm);
+  console.log("button", open, component);
+  const dispatch = useDispatch();
+
   return (
     <>
+      {/* TODO: (create task) with form Modal */}
+      {open && component === "filterHeader" && <Modal />}
       {useIn === "filterHeader" ? (
         <Button
           variant="contained"
+          onClick={() => dispatch(openTaskForm("filterHeader"))}
           sx={{
             width: "152px",
             height: "48px",
@@ -21,13 +31,16 @@ const AddTaskButton = ({ useIn }) => {
           Add Task
         </Button>
       ) : (
-        <Button
-          variant="text"
-          startIcon={<AddIcon />}
-          sx={{ fontWeight: 700, fontSize: 14, color: "#000000CC" }}
-        >
-          Add Task
-        </Button>
+        <Box sx={{ borderBottom: "1px solid #0000001A" }}>
+          <Button
+            onClick={() => dispatch(openTaskForm("InAccordion"))}
+            variant="text"
+            startIcon={<AddIcon sx={{ color: "#7B1984", fontSize: "18px" }} />}
+            sx={{ fontWeight: 700, fontSize: 14, color: "#000000CC" }}
+          >
+            Add Task
+          </Button>
+        </Box>
       )}
     </>
   );
