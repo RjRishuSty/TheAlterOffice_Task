@@ -1,21 +1,89 @@
-import { Box, Button, Grid } from "@mui/material";
+import {
+  Box,
+  Grid,
+  TextField,
+  Typography,
+  MenuItem,
+  Select,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
 import React from "react";
-import { closeTaskForm } from "../../Redux/Slices/TaskFormSlice";
-import { useDispatch } from "react-redux";
+import FormBtnInAccordion from "./FormBtnInAccordion";
+import Styles from "./FormInAccordion.module.css";
 
 const FormInAccordion = () => {
-  const dispach = useDispatch();
+  const fields = [
+    {
+      id: "title",
+      label: "Task Title*",
+      type: "text",
+      placeholder: "Task title",
+    },
+    { id: "date", label: "Add date*", type: "date", placeholder: "" },
+    {
+      id: "status",
+      label: "Task Status*",
+      type: "select",
+      options: [
+        { id: "todo", label: "To-do" },
+        { id: "in-progress", label: "In-Progress" },
+        { id: "completed", label: "Completed" },
+      ],
+    },
+    {
+      id: "category",
+      label: "Category*",
+      type: "select",
+      options: [
+        { id: "work", label: "Work" },
+        { id: "personal", label: "Personal" },
+      ],
+    },
+  ];
+
   return (
-    <Grid container>
-      <Grid item sx={{ border: "2px solid red" }}>
-        <Box>
-          <Button>Add</Button>
-          <Button  onClick={() => dispach(closeTaskForm())}>Cancel</Button>
-        </Box>
+    <>
+      <Grid container spacing={2} sx={{ mt: 0 }}>
+        {fields.map((item) => (
+          <Grid item md={2} sx={{ mb: 2 }} key={item.id}>
+            <Typography gutterBottom variant="caption">
+              {item.label}
+            </Typography>
+            {item.type === "select" ? (
+              <Select
+                fullWidth
+                size="small"
+                defaultValue=""
+                className={Styles.input}
+              >
+                <MenuItem value="" disabled>
+                  choose
+                </MenuItem>
+                {item.options.map((option) => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            ) : (
+              <TextField
+                fullWidth
+                id={item.id}
+                type={item.type}
+                size="small"
+                variant="outlined"
+                placeholder={item.placeholder}
+                className={Styles.input}
+              />
+            )}
+          </Grid>
+        ))}
       </Grid>
-      <Grid item sx={{ border: "2px solid red" }}></Grid>
-      <Grid item sx={{ border: "2px solid red" }}></Grid>
-    </Grid>
+      <Box sx={{ mt: -1 }}>
+        <FormBtnInAccordion />
+      </Box>
+    </>
   );
 };
 

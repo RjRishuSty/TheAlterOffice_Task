@@ -7,7 +7,9 @@ import Modal from "../Modal/Modal";
 
 const AddTaskButton = ({ useIn }) => {
   const { open, component } = useSelector((state) => state.taskForm);
-  console.log("button", open, component);
+  const task = useSelector((state) => state.task);
+  console.log("button", task);
+  
   const dispatch = useDispatch();
 
   return (
