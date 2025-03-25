@@ -10,31 +10,24 @@
   align-items: center;
   z-index: 1300;
 }
-.card {
-  /* border: 2px solid red; */
-  width: 600px;
-  min-height: 30vh;
-  background-color: #fff;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-}
+/* sx={{
+  border: "2px solid black",
+  borderRadius: 0,
+  width: "100%",
+  height:'auto',
+  display: "flex",
+  justifyContent:'center',
+  alignItems:'center',
+  flexDirection: "row",
+  overflow: "hidden",
+}} */
+
 .cardHeader {
-  /* border: 2px solid blue; */
   width: 100%;
   padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-bottom: 1px solid #0000001a;
 }
-.form{
-    /* border: 2px solid blue; */
-    width: 100%;
-    height: auto;
-    margin: 1rem 0rem 3rem 0rem;
-    padding: 0px 1.2rem;
-}
+
 .cardFooter {
   border: 1px solid #00000021;
   width: 100%;
@@ -53,4 +46,14 @@
   font-weight: 700;
   border-radius: 41px !important;
   text-transform: uppercase;
+}
+
+
+/* Activity css */
+
+.text{
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  color:'#1E212A' !important;
+  
 }

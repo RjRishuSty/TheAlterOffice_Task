@@ -8,7 +8,7 @@ const TaskCategory = () => {
   const  tabValue = useSelector((state)=>state.tab);
   const taskTypes = [
     { label: "Todo", id: "todo", color: "#FAC3FF" },
-    { label: "In-Progress", id: "progress", color: "#85D9F1" },
+    { label: "In-Progress", id: "in-progress", color: "#85D9F1" },
     { label: "Completed", id: "completed", color: "#CEFFCC" },
   ];
   return (
@@ -29,7 +29,7 @@ const TaskCategory = () => {
       ) : (
         <Grid container>
           {taskTypes.map((item) => (
-            <Grid item xs={12} sm={12} md={12} key={item.id}>
+            <Grid item xs={12} sm={12} md={12} mb={2} key={item.id}>
               <AccordionBox item={item} />
             </Grid> 
           ))}

@@ -1,30 +1,32 @@
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import React from "react";
 import { closeTaskForm } from "../../Redux/Slices/TaskFormSlice";
 import { useDispatch } from "react-redux";
-import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-const FormBtnInAccordion = () => {
+const AccordionFormSubmitBtn = () => {
   const dispach = useDispatch();
   return (
     <>
       <Button
-        endIcon={<KeyboardReturnIcon sx={{ color: "#fff" }} />}
+        startIcon={<AddCircleOutlineIcon sx={{ color: "#fff" }} />}
         variant="contained"
+        type='submit'
+        size="small"
         sx={{
           backgroundColor: "#7B1984",
           borderRadius: "60px",
-          height: "30px",
+          height: "auto",
           color: "#fff",
           fontWeight: 700,
           fontSize: "14px",
-          padding:'10px 20px',
-          mr: 2,
+          mr: 1,
         }}
       >
         Add
       </Button>
       <Button
+      size="small"
         variant="text"
         sx={{ color: "#000000", fontSize: "14px", fontWeight: 700 }}
         onClick={() => dispach(closeTaskForm())}
@@ -35,4 +37,4 @@ const FormBtnInAccordion = () => {
   );
 };
 
-export default FormBtnInAccordion;
+export default AccordionFormSubmitBtn;

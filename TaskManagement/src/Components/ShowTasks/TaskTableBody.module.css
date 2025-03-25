@@ -1,0 +1,30 @@
+.tableRow {
+  /* border: 1px solid blue; */
+  width: 100%;
+  height: auto;
+  padding: 5px 0px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid #0000001a;
+}
+.tableCell {
+  /* border: 1px solid red !important; */
+  width: 100% !important;
+  height: auto;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #000000 !important;
+}
+.text{
+  color: #000000 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+.card{
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  text-transform: uppercase !important;
+  background-color: #DDDADD !important;
+  color: #000000 !important;
+}

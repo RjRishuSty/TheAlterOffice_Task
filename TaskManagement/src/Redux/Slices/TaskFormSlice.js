@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setSelectedTaskToUpdate } from "./TaskSlice";
 
 const taskFormSlice = createSlice({
   name: "TaskForm",
@@ -14,5 +15,11 @@ const taskFormSlice = createSlice({
     },
   },
 });
+
+export const closeTaskFormAndResetTask = () => (dispatch) => {
+  dispatch(closeTaskForm());
+  dispatch(setSelectedTaskToUpdate(null)); // Reset selectedTask
+};
 export const { openTaskForm, closeTaskForm } = taskFormSlice.actions;
 export default taskFormSlice.reducer;
+ 

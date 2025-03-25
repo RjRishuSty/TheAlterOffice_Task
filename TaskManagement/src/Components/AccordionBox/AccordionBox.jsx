@@ -5,19 +5,29 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Box,
   Typography,
 } from "@mui/material";
 import AddTaskButton from "../AddTaskButton/AddTaskButton";
 import { useSelector } from "react-redux";
-import FormInAccordion from "../FormInAccordion/FormInAccordion";
+import FormLayout from "../FormLayout/FormLayout";
+import ShowTasks from "../ShowTasks/ShowTasks";
 
 const AccordionBox = ({ item }) => {
+  const taskData = useSelector((state) => state.task.task);
   const [expanded, setExpanded] = useState(item.id !== "completed");
-  // const { task } = useSelector((state) => state.task);
   const { open, component } = useSelector((state) => state.taskForm);
+
   const handleToggle = () => {
     setExpanded((prev) => !prev);
   };
+
+  const todoTasks = taskData?.filter((task) => task.status === "todo") || [];
+  const progressTasks =
+    taskData?.filter((task) => task.status === "in-progress") || [];
+  const completedTasks =
+    taskData?.filter((task) => task.status === "completed") || [];
+
   return (
     <Accordion
       key={item.id}
@@ -25,7 +35,6 @@ const AccordionBox = ({ item }) => {
       onChange={handleToggle}
       defaultExpanded
       sx={{
-        margin: "10px 0px",
         padding: 0,
         boxShadow: "none",
         border: "none",
@@ -57,7 +66,18 @@ const AccordionBox = ({ item }) => {
             color: "#000",
           }}
         >
-          {`${item.label} (3)`}
+          {item.id === "todo" &&
+            `${item.label} ${
+              todoTasks.length > 0 ? `(${todoTasks.length})` : ""
+            }`}
+            {item.id === "in-progress" &&
+            `${item.label} ${
+              progressTasks.length > 0 ? `(${progressTasks.length})` : ""
+            }`}
+            {item.id === "completed" &&
+            `${item.label} ${
+              completedTasks.length > 0 ? `(${completedTasks.length})` : ""
+            }`}
         </Typography>
       </AccordionSummary>
       <AccordionDetails
@@ -75,7 +95,21 @@ const AccordionBox = ({ item }) => {
       >
         {item.id === "todo" && <AddTaskButton />}
         {/* TODO: (create task) in Accordion  */}
-        {open && component === "InAccordion" && <FormInAccordion />}
+        {open && component === "InAccordion" && item.id === "todo" && (
+          <FormLayout />
+        )}
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            alignItems: "start",
+            flexDirection: "column",
+            height: item.id === "todo" ? 300 : 200,
+          }}
+        >
+          <ShowTasks item={item} />
+        </Box>
       </AccordionDetails>
     </Accordion>
   );

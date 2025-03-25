@@ -5,7 +5,7 @@ import taskFormReducer from './Slices/TaskFormSlice';
 import taskReducer from './Slices/TaskSlice';
 
 export const Store = configureStore({
-  reducer: {
+  reducer: { 
     user: userReducer,
     tab: tabsReducer,
     taskForm:taskFormReducer,

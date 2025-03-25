@@ -1,10 +1,10 @@
 import { Box, TextareaAutosize } from "@mui/material";
 import React from "react";
-import Styles from './InputForm.module.css';
+import Styles from "./Inputs.module.css";
 import SortTwoToneIcon from "@mui/icons-material/SortTwoTone";
 
-
-const TextAreaInput = ({ item, formData, handleChange }) => {
+const TextAreaInput = ({ item, formData, handleChange,selectTask }) => {
+  console.log("InTextAreaFields",selectTask)
   return (
     <Box sx={{ position: "relative", width: "100%" }}>
       <SortTwoToneIcon
@@ -23,7 +23,7 @@ const TextAreaInput = ({ item, formData, handleChange }) => {
         placeholder={item.placeholder}
         id={item.id}
         name={item.id}
-        value={formData.description}
+        value={selectTask?selectTask.description:formData.description}
         onChange={handleChange}
         style={{
           width: "100%",

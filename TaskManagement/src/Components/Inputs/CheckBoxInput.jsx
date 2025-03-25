@@ -6,7 +6,9 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const CheckBoxInput = ({ item, formData, handleChange }) => {
+const CheckBoxInput = ({ item, formData, handleChange,selectTask }) => {
+  console.log("CheckBoxInput",selectTask)
+  
   return (
     <Box>
       <Typography
@@ -16,7 +18,7 @@ const CheckBoxInput = ({ item, formData, handleChange }) => {
         {item.label}
       </Typography>
       <ToggleButtonGroup
-        value={formData.category}
+        value={selectTask?selectTask.category:formData.category}
         exclusive
         onChange={handleChange}
         sx={{ display: "flex" }}

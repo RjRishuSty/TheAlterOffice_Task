@@ -1,8 +1,9 @@
 import { FormControl, MenuItem, Select, Typography } from "@mui/material";
-import Styles from "./InputForm.module.css";
+import Styles from "./Inputs.module.css";
 import React from "react";
 
-const SelectInput = ({ item, formData, handleChange }) => {
+const SelectInput = ({ item, formData, handleChange,selectTask }) => {
+  console.log("SelectInputField",selectTask)
   return (
     <>
       <Typography
@@ -21,7 +22,7 @@ const SelectInput = ({ item, formData, handleChange }) => {
         className={Styles.input}
           id={item.id}
           name={item.id}
-          value={formData[item.id]}
+          value={selectTask?selectTask.status:formData.status}
           onChange={handleChange}
           displayEmpty
         >

@@ -3,19 +3,16 @@ import AddIcon from "@mui/icons-material/Add";
 import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { openTaskForm } from "../../Redux/Slices/TaskFormSlice";
-import Modal from "../Modal/Modal";
+import FormLayout from "../FormLayout/FormLayout";
 
 const AddTaskButton = ({ useIn }) => {
   const { open, component } = useSelector((state) => state.taskForm);
-  const task = useSelector((state) => state.task);
-  console.log("button", task);
-  
   const dispatch = useDispatch();
 
   return (
     <>
       {/* TODO: (create task) with form Modal */}
-      {open && component === "filterHeader" && <Modal />}
+      {open && component === "filterHeader" && <FormLayout />}
       {useIn === "filterHeader" ? (
         <Button
           variant="contained"

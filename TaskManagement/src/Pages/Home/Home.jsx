@@ -5,14 +5,13 @@ import TaskCategory from "../../Components/TaskCategory/TaskCategory";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  const tabValue = useSelector((state)=>state.tab);
+  const tabValue = useSelector((state) => state.tab);
 
   return (
     <Stack sx={{ padding: "0rem 1.9rem 3rem 1.9rem" }}>
       {tabValue !== "board" && (
         <Box
           sx={{
-            // border: "2px solid yellow",
             width: "100%",
             display: "flex",
             justifyContent: "space-between",
@@ -27,7 +26,6 @@ const Home = () => {
 
       <Box
         sx={{
-          // border: "2px solid red",
           marginTop: 1.5,
         }}
       >
