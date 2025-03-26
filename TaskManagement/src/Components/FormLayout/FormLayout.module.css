@@ -10,6 +10,7 @@
   background-color: #f1f1f15c !important;
 }
 .optionBtn {
+  /* position: absolute; */
   width: auto;
   height: 30px !important;
   font-size: 10px !important;

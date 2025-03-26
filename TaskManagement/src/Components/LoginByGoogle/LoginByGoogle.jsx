@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import React from "react";
 import googleLogo from "../../assets/google.png";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -10,6 +10,7 @@ const auth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
 
 const LoginByGoogle = () => {
+  const isMobile = useMediaQuery('(max-width:800px)');
   const dispatch = useDispatch();
   const handleGoogleLogin = async () => {
     try {
@@ -42,15 +43,16 @@ const LoginByGoogle = () => {
         />
       }
       sx={{
-        width: "364px",
-        height: "60px",
+        width: isMobile?"90%":"70%",
+        height:isMobile?"auto":"60px",
         textTransform: "capitalize",
         borderRadius: "18.91px",
+        padding:'10px 5px',
         backgroundColor: "#292929",
         color: "#FFFFFF",
         fontFamily: '"Urbanist", sans-serif',
         fontWeight: 700,
-        fontSize: "21.82px",
+        fontSize: isMobile?"17px":"21.82px",
         mt: 2,
       }}
       onClick={handleGoogleLogin}

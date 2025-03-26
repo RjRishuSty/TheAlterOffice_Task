@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 import Styles from "./Modal.module.css";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -8,9 +8,13 @@ import {
 } from "../../Redux/Slices/TaskFormSlice";
 
 const ModalFooter = ({ selectedTask }) => {
+   const isMobile = useMediaQuery("(max-width:800px)");
   const dispatch = useDispatch();
   return (
-    <Box className={Styles.cardFooter}>
+    <Box
+      className={Styles.cardFooter}
+      sx={{ padding: isMobile?"10px 5px":"20px" }}
+    >
       <Button
         onClick={() =>
           dispatch(selectedTask ? closeTaskFormAndResetTask() : closeTaskForm())
@@ -31,7 +35,7 @@ const ModalFooter = ({ selectedTask }) => {
         sx={{ backgroundColor: "#7B1984", color: "#fff" }}
         className={Styles.btn}
       >
-        {selectedTask?"Update":"Create"}
+        {selectedTask ? "Update" : "Create"}
       </Button>
     </Box>
   );

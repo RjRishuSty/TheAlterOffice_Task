@@ -3,7 +3,7 @@ import Styles from "./Inputs.module.css";
 import React from "react";
 
 const SelectInput = ({ item, formData, handleChange,selectTask }) => {
-  console.log("SelectInputField",selectTask)
+  
   return (
     <>
       <Typography

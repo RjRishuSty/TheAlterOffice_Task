@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTask, updateTask } from "../../Redux/Slices/TaskSlice";
 import { fields } from "./FormFields";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import FormInAccordion from "./FormInAccordion";
 import Modal from "../Modal/Modal";
+import MobileSizeForm from "../MobileSizeForm/MobileSizeForm";
 
 const FormLayout = () => {
-   const selectTask = useSelector((state) => state.task.selectedTask);
+  const selectTask = useSelector((state) => state.task.selectedTask);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     title: "",
@@ -39,16 +40,20 @@ const FormLayout = () => {
   );
 
   return (
-    
-    <Stack component="form" onSubmit={selectTask?handleUpdate:handleSubmit}>
+    <Stack component="form" onSubmit={selectTask ? handleUpdate : handleSubmit}>
       {/* TODO: (create task) with form Modal and Form in Accordion */}
-      {open && component === "filterHeader" ? (
+      {(open && component === "filterHeader") ||
+      (open && component === "mobileHeader") ? (
         <>
-          <Modal formData={formData}  setFormData={setFormData} handleChange={handleChange}  />
+          <Modal
+            formData={formData}
+            setFormData={setFormData}
+            handleChange={handleChange}
+          />
         </>
       ) : (
         <FormInAccordion
-          formData={formData} 
+          formData={formData}
           handleChange={handleChange}
           remainingFields={remainingFields}
         />

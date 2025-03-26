@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography, useMediaQuery } from "@mui/material";
 import Styles from "./Profile.module.css";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { getAuth, signOut } from "firebase/auth";
@@ -10,8 +10,9 @@ import { userLogout } from "../../Redux/Slices/UserSlice";
 const auth = getAuth(firebaseApp);
 
 const Profile = () => {
+  const isMobile = useMediaQuery("(max-width:800px)");
+  const xSmall = useMediaQuery("(max-width:347px)");
   const user = useSelector((state) => state.user);
-  // console.log("Profile FIle:", user);
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -33,6 +34,7 @@ const Profile = () => {
             justifyContent: "center",
             alignItems: "center",
             cursor: "pointer",
+            mt: isHovered && isMobile ? 2 : "",
           }}
           onClick={() => setIsHovered(!isHovered)}
         >
@@ -42,15 +44,19 @@ const Profile = () => {
             className={Styles.userImg}
             sx={{ mr: 1 }}
           />
-          <Typography
-            sx={{
-              fontWeight: 700,
-              fontSize: "16px",
-              ml: 1,
-            }}
-          >
-            {user?.displayName}
-          </Typography>
+          {!xSmall ? (
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: "16px",
+                ml: 1,
+              }}
+            >
+              {user?.displayName}
+            </Typography>
+          ) : (
+            ""
+          )}
         </Box>
         {isHovered && (
           <Button
@@ -67,6 +73,8 @@ const Profile = () => {
               mt: 1,
               backgroundColor: "#FFF9F9",
               border: "1px solid #7B198426",
+
+              mb: isHovered && isMobile ? 1 : "",
             }}
             onClick={handleLogout}
           >

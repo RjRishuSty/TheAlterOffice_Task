@@ -7,27 +7,21 @@ import {
   AccordionSummary,
   Box,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import AddTaskButton from "../AddTaskButton/AddTaskButton";
 import { useSelector } from "react-redux";
 import FormLayout from "../FormLayout/FormLayout";
 import ShowTasks from "../ShowTasks/ShowTasks";
 
-const AccordionBox = ({ item }) => {
-  const taskData = useSelector((state) => state.task.task);
+const AccordionBox = ({ item, categorizedTasks }) => {
+  const isMobile = useMediaQuery("(max-width:800px)");
   const [expanded, setExpanded] = useState(item.id !== "completed");
   const { open, component } = useSelector((state) => state.taskForm);
 
   const handleToggle = () => {
     setExpanded((prev) => !prev);
   };
-
-  const todoTasks = taskData?.filter((task) => task.status === "todo") || [];
-  const progressTasks =
-    taskData?.filter((task) => task.status === "in-progress") || [];
-  const completedTasks =
-    taskData?.filter((task) => task.status === "completed") || [];
-
   return (
     <Accordion
       key={item.id}
@@ -68,15 +62,21 @@ const AccordionBox = ({ item }) => {
         >
           {item.id === "todo" &&
             `${item.label} ${
-              todoTasks.length > 0 ? `(${todoTasks.length})` : ""
+              categorizedTasks.todo.length > 0
+                ? `(${categorizedTasks.todo.length})`
+                : ""
             }`}
-            {item.id === "in-progress" &&
+          {item.id === "in-progress" &&
             `${item.label} ${
-              progressTasks.length > 0 ? `(${progressTasks.length})` : ""
+              categorizedTasks["in-progress"].length > 0
+                ? `(${categorizedTasks["in-progress"].length})`
+                : ""
             }`}
-            {item.id === "completed" &&
+          {item.id === "completed" &&
             `${item.label} ${
-              completedTasks.length > 0 ? `(${completedTasks.length})` : ""
+              categorizedTasks.completed.length > 0
+                ? `(${categorizedTasks.completed.length})`
+                : ""
             }`}
         </Typography>
       </AccordionSummary>
@@ -85,7 +85,7 @@ const AccordionBox = ({ item }) => {
           backgroundColor: "#F1F1F1",
           minHeight:
             item.id === "todo"
-              ? "376px"
+              ? "250px"
               : item.id === "progress"
               ? "158px"
               : "100px",
@@ -93,7 +93,8 @@ const AccordionBox = ({ item }) => {
           borderBottomRightRadius: "12px",
         }}
       >
-        {item.id === "todo" && <AddTaskButton />}
+        {!isMobile ? item.id === "todo" && <AddTaskButton /> : ""}
+
         {/* TODO: (create task) in Accordion  */}
         {open && component === "InAccordion" && item.id === "todo" && (
           <FormLayout />
@@ -108,7 +109,7 @@ const AccordionBox = ({ item }) => {
             height: item.id === "todo" ? 300 : 200,
           }}
         >
-          <ShowTasks item={item} />
+          <ShowTasks item={item} categorizedTasks={categorizedTasks} />
         </Box>
       </AccordionDetails>
     </Accordion>

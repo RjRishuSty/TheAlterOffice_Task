@@ -7,7 +7,7 @@ import {
 import React from "react";
 
 const CheckBoxInput = ({ item, formData, handleChange,selectTask }) => {
-  console.log("CheckBoxInput",selectTask)
+  
   
   return (
     <Box>
@@ -35,7 +35,7 @@ const CheckBoxInput = ({ item, formData, handleChange,selectTask }) => {
               backgroundColor: " #FFF",
               borderRadius: "41px",
               fontSize: "12px",
-              padding: "9px 25px",
+              padding: "9px 15px",
               fontWeight: "700",
               color: "#090909",
               "&.Mui-selected": {

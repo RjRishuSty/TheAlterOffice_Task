@@ -7,17 +7,12 @@ import InProgress from "./InProgress";
 import Completed from "./Completed";
 import { reorderTasks } from "../../Redux/Slices/TaskSlice";
 
-const ShowTasks = ({ item }) => {
+const ShowTasks = ({ item, categorizedTasks }) => {
   
   const dispatch = useDispatch();
   const taskData = useSelector((state) => state.task.task);
 
-  // TODO: Categorize tasks based on status
-  const categorizedTasks = {
-    todo: taskData.filter((task) => task.status === "todo"),
-    "in-progress": taskData.filter((task) => task.status === "in-progress"),
-    completed: taskData.filter((task) => task.status === "completed"),
-  };
+
 
   const handleDragEnd = (event) => {
     const { active, over } = event;

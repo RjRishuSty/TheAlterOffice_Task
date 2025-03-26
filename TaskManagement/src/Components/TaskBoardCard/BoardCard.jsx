@@ -1,7 +1,14 @@
 import { Card, Typography } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
+import ShowTasks from "../ShowTasks/ShowTasks";
 
-const BoardCard = ({ item }) => {
+const BoardCard = ({ item, categorizedTasks }) => {
+  const taskData = useSelector((state) => state.task.task);
+  console.log("BoardCard", taskData);
+
+ 
+
   return (
     <Card
       sx={{
@@ -27,6 +34,7 @@ const BoardCard = ({ item }) => {
       >
         {item.label}
       </Typography>
+      <ShowTasks item={item} categorizedTasks={categorizedTasks} />
     </Card>
   );
 };

@@ -10,21 +10,11 @@
   align-items: center;
   z-index: 1300;
 }
-/* sx={{
-  border: "2px solid black",
-  borderRadius: 0,
-  width: "100%",
-  height:'auto',
-  display: "flex",
-  justifyContent:'center',
-  alignItems:'center',
-  flexDirection: "row",
-  overflow: "hidden",
-}} */
+
 
 .cardHeader {
   width: 100%;
-  padding: 20px;
+
   border-bottom: 1px solid #0000001a;
 }
 
@@ -36,8 +26,8 @@
   justify-content: flex-end;
   align-items: center;
   background-color: #f1f1f1;
-  padding: 20px;
-  margin-top: auto;
+  position: relative !important;
+  bottom: 0 !important;
 }
 .btn {
   width: 102px;
@@ -47,7 +37,7 @@
   border-radius: 41px !important;
   text-transform: uppercase;
 }
-
+ 
 
 /* Activity css */
 

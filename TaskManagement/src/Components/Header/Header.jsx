@@ -1,18 +1,19 @@
 import React from "react";
-import { AppBar, Box, Toolbar } from "@mui/material";
+import { AppBar, Box, Toolbar, useMediaQuery } from "@mui/material";
 import Logo from "../Logo/Logo";
 import Profile from "../Profile/Profile";
 import TabsComp from "../TabsComp/TabsComp";
 
 const Header = () => {
+  const isMobile = useMediaQuery("(max-width:800px)");
   return (
-    <AppBar position="static" sx={{ mt: 4 }}>
-      <Toolbar sx={{ display: "flex" }}>
-        <Box sx={{ flexGrow: 1 }}>
+    <AppBar position="static" sx={{ mt: isMobile?0:4, backgroundColor:isMobile?"#FAEEFC":'white' }}>
+      <Toolbar sx={{ display: "flex",  }}>
+        <Box sx={{ flexGrow: 1, }}>
           {/* TODO: Logo Here.......... */}
-          <Logo />
+          <Logo useIn="header"/>
           {/* TODO: Tabs Here........ */}
-          <TabsComp />
+          {!isMobile?<TabsComp />:""}
         </Box>
         {/* TODO:  User Profile......  */}
         <Profile />

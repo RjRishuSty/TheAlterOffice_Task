@@ -1,25 +1,34 @@
 import React from "react";
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { openTaskForm } from "../../Redux/Slices/TaskFormSlice";
 import FormLayout from "../FormLayout/FormLayout";
 
 const AddTaskButton = ({ useIn }) => {
+  const isMobile = useMediaQuery("(max-width:800px)");
   const { open, component } = useSelector((state) => state.taskForm);
+  console.log("button",open,component)
   const dispatch = useDispatch();
 
   return (
     <>
       {/* TODO: (create task) with form Modal */}
-      {open && component === "filterHeader" && <FormLayout />}
-      {useIn === "filterHeader" ? (
+      {open && (component === "filterHeader" || component === "mobileHeader") && <FormLayout />}
+
+      {useIn === "filterHeader" || useIn === "mobileHeader" ? (
         <Button
           variant="contained"
-          onClick={() => dispatch(openTaskForm("filterHeader"))}
+          onClick={() =>
+            dispatch(
+              openTaskForm(
+                useIn === "filterHeader" ? "filterHeader" : "mobileHeader"
+              )
+            )
+          }
           sx={{
             width: "152px",
-            height: "48px",
+            height: isMobile ? "auto" : "48px",
             backgroundColor: "#7B1984",
             borderRadius: "41px",
             color: "#ffff",

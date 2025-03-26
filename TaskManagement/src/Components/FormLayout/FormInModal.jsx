@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid, TextField, Typography } from "@mui/material";
+import { Box, Grid, TextField, Typography, useMediaQuery } from "@mui/material";
 import Styles from "./FormLayout.module.css";
 import { fields } from "./FormFields";
 import TextAreaInput from "../Inputs/TextAreaInput";
@@ -8,7 +8,7 @@ import SelectInput from "../Inputs/SelectInput";
 import { useDispatch, useSelector } from "react-redux";
 
 const FormInModal = ({ formData, setFormData, handleChange }) => {
-
+  const isMobile = useMediaQuery("(max-width:800px)");
   const selectTask = useSelector((state) => state.task.selectedTask);
 
   // Sync formData with selected task when editing
@@ -27,12 +27,12 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
   }, [selectTask, setFormData]);
 
   return (
-    <Box sx={{ width: "100%", height: "51.6vh", overflowY: "auto" }}>
-      <Grid container rowSpacing={1} columnSpacing={2}>
+    <Box sx={{width: "100%", height:isMobile?"auto":"auto", overflowY: "auto", }}>
+      <Grid container sx={{display:'flex',justifyContent:'space-between',alignItems:"center"}}>
         {fields.map((item) => (
           <React.Fragment key={item.id}>
             {item.type === "text" || item.type === "file" ? (
-              <Grid item xs={12} sm={12} md={12} sx={{ mt: 1 }}>
+              <Grid item xs={12} sm={12} md={12} sx={{ mt: 1,mb:1 }}>
                 {item.type === "file" && (
                   <Typography
                     gutterBottom
@@ -71,7 +71,7 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
             )}
 
             {item.id === "category" && (
-              <Grid item xs={12} sm={12} md={4}>
+              <Grid item xs={12} sm={12} md={3} sx={{marginRight:{md:1}}}>
                 <CheckBoxInput
                   item={item}
                   formData={formData}
@@ -81,7 +81,7 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
             )}
 
             {item.id === "date" && (
-              <Grid item xs={12} sm={12} md={4}>
+              <Grid item xs={12} sm={12} md={3} sx={{marginRight:{md:1}}}>
                 <Typography
                   gutterBottom
                   sx={{
@@ -108,7 +108,7 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
             )}
 
             {item.id === "status" && (
-              <Grid item xs={12} sm={12} md={4}>
+              <Grid item xs={12} sm={12} md={3} sx={{marginRight:{md:1}}}>
                 <SelectInput
                   item={item}
                   formData={formData}

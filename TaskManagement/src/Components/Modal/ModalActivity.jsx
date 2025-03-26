@@ -1,6 +1,8 @@
 import React from "react";
 import { Grid, Stack, Typography } from "@mui/material";
 import Styles from "./Modal.module.css";
+import { formatDate } from "../FormateDate/FormateDate";
+
 
 const ModalActivity = ({ selectedTask }) => {
   console.log("InAcitivity",selectedTask);
@@ -18,24 +20,14 @@ const ModalActivity = ({ selectedTask }) => {
     },
   ].filter(Boolean);
 
-  const formatDate = (dateString) => {
-    if (!dateString) return "Invalid Date";
-    const date = new Date(dateString);
-    return isNaN(date.getTime()) ? "Invalid Date" : date.toLocaleString("en-US", {
-      month: "short",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-  };
+  
 
   
   return (
-    <Stack
+    <Stack component='div'
       sx={{
         width: "100%",
-        height: "51.7vh",
+        height: {sm:'70vh',md:"51.7vh"},
         display: "flex",
         justifyContent: "flex-start",
         alignItems: "start",

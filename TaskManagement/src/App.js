@@ -5,7 +5,6 @@ import Login from "./Pages/Login/Login";
 import Home from "./Pages/Home/Home";
 
 const App = () => {
-
   const router = createBrowserRouter([
     {
       path: "/",

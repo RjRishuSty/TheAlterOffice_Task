@@ -1,10 +1,12 @@
-import { Box,Stack } from "@mui/material";
+import { Box,Stack, useMediaQuery } from "@mui/material";
 import React from "react";
 import Search from "../Search/Search";
 import FilterByBtn from "./FilterByBtn";
 import AddTaskButton from "../AddTaskButton/AddTaskButton";
 
 const FilterSection = () => {
+  const isMobile = useMediaQuery("(max-width:800px)");
+  const miniLaptop = useMediaQuery("(max-width:1362px)");
   return (
     <Stack
       sx={{
@@ -13,7 +15,7 @@ const FilterSection = () => {
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
-        padding: "0px 1.8rem",
+        padding: isMobile?"0rem 0.5rem":"0px 1.8rem",
         marginTop:1
       }}
     >
@@ -25,18 +27,18 @@ const FilterSection = () => {
           alignItems: "center",
         }}
       >
-        <FilterByBtn />
+        {!isMobile?<FilterByBtn />:""}
       </Box>
       <Box
         sx={{
-          width: "30%",
+          width: miniLaptop?"70%":"30%",
           display: "flex",
-          justifyContent: "space-around",
+          justifyContent:isMobile?"end": "space-around",
           alignItems: "center",
         }}
       >
-        <Search />
-        <AddTaskButton useIn="filterHeader"/>
+       {!isMobile? <Search />:""}
+       {isMobile?<AddTaskButton useIn="mobileHeader"/>:<AddTaskButton useIn="filterHeader"/>} 
       </Box>
     </Stack>
   );

@@ -1,9 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import Styles from "./Modal.module.css";
 import CloseBtn from "../CloseBtn/CloseBtn";
 
 const ModalHeader = ({ selectedTask }) => {
+  const isMobile = useMediaQuery("(max-width:800px)");
   return (
     <Box
       className={Styles.cardHeader}
@@ -12,6 +13,7 @@ const ModalHeader = ({ selectedTask }) => {
         justifyContent: selectedTask ? "end" : "space-between",
         alignItems: "center",
         backgroundColor: "#FFFFFF",
+        padding: isMobile?'10px 5px':'20px'
       }}
     >
       {!selectedTask ? (

@@ -3,7 +3,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import React, { useState } from "react";
 
-const Search = () => {
+const Search = ({forResponsive}) => {
+  
   const [search, setSearch] = useState("");
   const handleClear = () => {
     setSearch("");
@@ -11,7 +12,7 @@ const Search = () => {
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-
+console.log("Search",search)
   return (
     <>
       <TextField
@@ -23,7 +24,7 @@ const Search = () => {
         onChange={handleSearch}
         size="small"
         sx={{
-          width: "50%",
+          width: forResponsive==="responsive"?"100%":"50%",
           height: "auto",
           borderRadius: "60px",
           border: "1px solid #0000006B",
