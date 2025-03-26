@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 import BoardTaskCard from "../TaskBoardCard/BoardTaskCard";
 
 const TodoTask = ({ task, item }) => {
-  
   const tabValue = useSelector((state) => state.tab);
 
   return (
@@ -33,15 +32,15 @@ const TodoTask = ({ task, item }) => {
           <TaskNotFound item={item} />
         )
       ) : task.length > 0 ? (
-        <Box sx={{ mt: 2.5,width:'100%' }}>
-            <SortableContext 
-              items={task.map((item) => item.id)}
-              strategy={verticalListSortingStrategy}
-            >
+        <Box sx={{ mt: 2.5, width: "100%" }}>
+          <SortableContext
+            items={task.map((item) => item.id)}
+            strategy={verticalListSortingStrategy}
+          >
             {task.map((item) => (
               <BoardTaskCard key={item.id} item={item} />
             ))}
-            </SortableContext>
+          </SortableContext>
         </Box>
       ) : (
         <TaskNotFound item={item} />

@@ -18,7 +18,7 @@ const Home = () => {
       sx={{ padding: miniLaptop ? "0rem 0.5rem" : "0rem 1.9rem 3rem 1.9rem" }}
     >
       {tabValue !== "board" && (
-        <Box
+        <Box 
           sx={{
             // border:'2px solid red',
             width: "100%",

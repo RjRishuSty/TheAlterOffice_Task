@@ -39,18 +39,17 @@ const TaskCategory = () => {
     filteredTasks["in-progress"].length > 0 ||
     filteredTasks.completed.length > 0;
 
-    console.log(hasResults,"abc")
   return (
     <Grid
       container
-      sx={{ width: "100%", minHeight: !hasResults?"70vh":"0px", alignItems: !hasResults?"center":'' }}
+      sx={{ width: "100%", minHeight: "70vh", alignItems: "center" }}
     >
       {searchText ? (
         hasResults ? (
           taskTypes.map(
             (item) =>
               filteredTasks[item.id].length > 0 && (
-                <Grid item xs={12} key={item.id} >
+                <Grid item xs={12} key={item.id}>
                   <AccordionBox
                     item={item}
                     todo={filteredTasks.todo}
@@ -67,7 +66,7 @@ const TaskCategory = () => {
         )
       ) : (
         taskTypes.map((item) => (
-          <Grid item xs={12} key={item.id} mb={2}>
+          <Grid item xs={12} key={item.id}>
             <AccordionBox
               item={item}
               todo={categorizedTasks.todo}

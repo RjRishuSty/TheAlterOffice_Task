@@ -14,7 +14,8 @@ import { useSelector } from "react-redux";
 import FormLayout from "../FormLayout/FormLayout";
 import ShowTasks from "../ShowTasks/ShowTasks";
 
-const AccordionBox = ({ item, categorizedTasks }) => {
+const AccordionBox = ({ item, todo, completed, progress }) => {
+  console.log(item.id,'box')
   const isMobile = useMediaQuery("(max-width:800px)");
   const [expanded, setExpanded] = useState(item.id !== "completed");
   const { open, component } = useSelector((state) => state.taskForm);
@@ -29,6 +30,7 @@ const AccordionBox = ({ item, categorizedTasks }) => {
       onChange={handleToggle}
       defaultExpanded
       sx={{
+        
         padding: 0,
         boxShadow: "none",
         border: "none",
@@ -61,34 +63,27 @@ const AccordionBox = ({ item, categorizedTasks }) => {
           }}
         >
           {item.id === "todo" &&
-            `${item.label} ${
-              categorizedTasks.todo.length > 0
-                ? `(${categorizedTasks.todo.length})`
-                : ""
-            }`}
+            `${item.label} ${todo.length > 0 ? `(${todo.length})` : ""}`}
           {item.id === "in-progress" &&
             `${item.label} ${
-              categorizedTasks["in-progress"].length > 0
-                ? `(${categorizedTasks["in-progress"].length})`
-                : ""
+              progress.length > 0 ? `(${progress.length})` : ""
             }`}
           {item.id === "completed" &&
             `${item.label} ${
-              categorizedTasks.completed.length > 0
-                ? `(${categorizedTasks.completed.length})`
-                : ""
+              completed.length > 0 ? `(${completed.length})` : ""
             }`}
         </Typography>
       </AccordionSummary>
       <AccordionDetails
         sx={{
+          // border:'5px solid red',
           backgroundColor: "#F1F1F1",
-          minHeight:
-            item.id === "todo"
-              ? "250px"
-              : item.id === "progress"
-              ? "158px"
-              : "100px",
+          // minHeight:
+          //   item.id === "todo"
+          //     ? "50px"
+          //     : item.id === "in-progress"
+          //     ? "158px"
+          //     : "100px",
           borderBottomLeftRadius: "12px",
           borderBottomRightRadius: "12px",
         }}
@@ -109,7 +104,12 @@ const AccordionBox = ({ item, categorizedTasks }) => {
             height: item.id === "todo" ? 300 : 200,
           }}
         >
-          <ShowTasks item={item} categorizedTasks={categorizedTasks} />
+          <ShowTasks
+            item={item}
+            todo={todo}
+            progress={progress}
+            completed={completed}
+          />
         </Box>
       </AccordionDetails>
     </Accordion>

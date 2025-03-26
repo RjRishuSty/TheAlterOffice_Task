@@ -7,12 +7,9 @@ import InProgress from "./InProgress";
 import Completed from "./Completed";
 import { reorderTasks } from "../../Redux/Slices/TaskSlice";
 
-const ShowTasks = ({ item, categorizedTasks }) => {
-  
+const ShowTasks = ({ item, todo, completed, progress }) => {
   const dispatch = useDispatch();
   const taskData = useSelector((state) => state.task.task);
-
-
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -23,15 +20,15 @@ const ShowTasks = ({ item, categorizedTasks }) => {
 
     if (oldIndex !== -1 && newIndex !== -1) {
       const newOrder = arrayMove(taskData, oldIndex, newIndex);
-      dispatch(reorderTasks(newOrder)); 
+      dispatch(reorderTasks(newOrder));
     }
   };
 
   return (
     <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
-      {item.id === "todo" && <TodoTask task={categorizedTasks.todo} item={item}/>}
-      {item.id === "in-progress" && <InProgress task={categorizedTasks["in-progress"]} item={item} />}
-      {item.id === "completed" && <Completed task={categorizedTasks.completed} item={item} />}
+      {item.id === "todo" && <TodoTask task={todo} item={item} />}
+      {item.id === "in-progress" && <InProgress task={progress} item={item} />}
+      {item.id === "completed" && <Completed task={completed} item={item} />}
     </DndContext>
   );
 };
