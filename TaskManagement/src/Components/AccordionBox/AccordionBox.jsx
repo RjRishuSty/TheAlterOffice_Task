@@ -15,7 +15,7 @@ import FormLayout from "../FormLayout/FormLayout";
 import ShowTasks from "../ShowTasks/ShowTasks";
 
 const AccordionBox = ({ item, todo, completed, progress }) => {
-  console.log(item.id,'box')
+
   const isMobile = useMediaQuery("(max-width:800px)");
   const [expanded, setExpanded] = useState(item.id !== "completed");
   const { open, component } = useSelector((state) => state.taskForm);
@@ -30,7 +30,6 @@ const AccordionBox = ({ item, todo, completed, progress }) => {
       onChange={handleToggle}
       defaultExpanded
       sx={{
-        
         padding: 0,
         boxShadow: "none",
         border: "none",
@@ -52,6 +51,8 @@ const AccordionBox = ({ item, todo, completed, progress }) => {
           height: "46px",
           borderTopRightRadius: "12px",
           borderTopLeftRadius: "12px",
+          overflow:'hidden',
+          zIndex:9
         }}
       >
         <Typography
@@ -76,14 +77,23 @@ const AccordionBox = ({ item, todo, completed, progress }) => {
       </AccordionSummary>
       <AccordionDetails
         sx={{
-          // border:'5px solid red',
           backgroundColor: "#F1F1F1",
-          // minHeight:
-          //   item.id === "todo"
-          //     ? "50px"
-          //     : item.id === "in-progress"
-          //     ? "158px"
-          //     : "100px",
+          overflowY:'scroll',
+           marginTop: "-8px !important",
+          "&::-webkit-scrollbar": {
+            width: "10px", 
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "#D9D9D97D",
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "rgb(194, 189, 189)", 
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "#D9D9D9",
+          },
           borderBottomLeftRadius: "12px",
           borderBottomRightRadius: "12px",
         }}
@@ -101,7 +111,7 @@ const AccordionBox = ({ item, todo, completed, progress }) => {
             justifyContent: "start",
             alignItems: "start",
             flexDirection: "column",
-            height: item.id === "todo" ? 300 : 200,
+            height: item.id === "todo" ? 250 : 200,
           }}
         >
           <ShowTasks

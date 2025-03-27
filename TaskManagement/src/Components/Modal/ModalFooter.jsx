@@ -13,7 +13,7 @@ const ModalFooter = ({ selectedTask }) => {
   return (
     <Box
       className={Styles.cardFooter}
-      sx={{ padding: isMobile?"10px 5px":"20px" }}
+      sx={{ padding:isMobile?" 20px 15px 35px 15px":"20px" }}
     >
       <Button
         onClick={() =>

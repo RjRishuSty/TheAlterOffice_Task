@@ -18,7 +18,8 @@ const Modal = ({ formData, setFormData, handleChange, handleUpdate }) => {
   return (
     <Stack
       // TODO: modal css
-      sx={{
+      sx={{ 
+        // border:'5px solid yellow',
         position: "fixed",
         top: 0,
         left: 0,
@@ -33,7 +34,7 @@ const Modal = ({ formData, setFormData, handleChange, handleUpdate }) => {
     >
       <Box
         sx={{
-          border: "3px solid pink",
+          border: "5px solid black",
           width:
             selectedTask && miniLaptop
               ? "80%"
@@ -47,6 +48,7 @@ const Modal = ({ formData, setFormData, handleChange, handleUpdate }) => {
           height: isMobile ? "auto" : "auto",
           borderRadius: isMobile ? "10px" : "20px",
           overflow: "hidden",
+          paddingBottom:isMobile?'20px':''
         }}
       >
         <ModalHeader selectedTask={selectedTask} />

@@ -32,7 +32,7 @@ const TodoTask = ({ task, item }) => {
           <TaskNotFound item={item} />
         )
       ) : task.length > 0 ? (
-        <Box sx={{ mt: 2.5, width: "100%" }}>
+        <Box sx={{ width: "100%", paddingRight:1 }}>
           <SortableContext
             items={task.map((item) => item.id)}
             strategy={verticalListSortingStrategy}

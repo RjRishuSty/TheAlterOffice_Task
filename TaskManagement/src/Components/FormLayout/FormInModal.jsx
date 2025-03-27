@@ -27,12 +27,25 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
   }, [selectTask, setFormData]);
 
   return (
-    <Box sx={{width: "100%", height:isMobile?"auto":"auto", overflowY: "auto", }}>
-      <Grid container sx={{display:'flex',justifyContent:'space-between',alignItems:"center"}}>
+    <Box
+      sx={{
+        width: "100%",
+        height: isMobile ? "auto" : "auto",
+        overflowY: "auto",
+      }}
+    >
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         {fields.map((item) => (
           <React.Fragment key={item.id}>
             {item.type === "text" || item.type === "file" ? (
-              <Grid item xs={12} sm={12} md={12} sx={{ mt: 1,mb:1 }}>
+              <Grid item xs={12} sm={12} md={12} sx={{ mt: 1, mb: 1 }}>
                 {item.type === "file" && (
                   <Typography
                     gutterBottom
@@ -54,14 +67,29 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
                   size="small"
                   fullWidth
                   type={item.type}
-                  value={item.type === "file" ? undefined : formData.title || ""}
+                  value={
+                    item.type === "file" ? undefined : formData.title || ""
+                  }
                   onChange={handleChange}
                 />
               </Grid>
             ) : null}
+            {/* TODO: uppload file image */}
+            {item.type === "file" && (
+              <Box
+                sx={{
+                  width: "100%",
+                  minHeight: "10vh",
+                  border: "2px solid #F1F1F1",
+                  borderRadius: 5,
+                  mt: 1,
+                  mb: 2,
+                }}
+              ></Box>
+            )}
 
             {item.id === "description" && (
-              <Grid item xs={12} sm={12} md={12}>
+              <Grid item xs={12} sm={12} md={12} mb={2}>
                 <TextAreaInput
                   item={item}
                   formData={formData}
@@ -71,7 +99,14 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
             )}
 
             {item.id === "category" && (
-              <Grid item xs={12} sm={12} md={3} sx={{marginRight:{md:1}}}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={3}
+                mb={2}
+                sx={{ marginRight: { md: 1 } }}
+              >
                 <CheckBoxInput
                   item={item}
                   formData={formData}
@@ -81,7 +116,14 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
             )}
 
             {item.id === "date" && (
-              <Grid item xs={12} sm={12} md={3} sx={{marginRight:{md:1}}}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={3}
+                mb={2}
+                sx={{ marginRight: { md: 1 } }}
+              >
                 <Typography
                   gutterBottom
                   sx={{
@@ -108,7 +150,14 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
             )}
 
             {item.id === "status" && (
-              <Grid item xs={12} sm={12} md={3} sx={{marginRight:{md:1}}}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={3}
+                mb={1}
+                sx={{ marginRight: { md: 1 } }}
+              >
                 <SelectInput
                   item={item}
                   formData={formData}

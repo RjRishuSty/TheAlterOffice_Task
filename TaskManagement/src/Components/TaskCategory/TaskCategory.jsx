@@ -4,9 +4,12 @@ import AccordionBox from "../AccordionBox/AccordionBox";
 import { useSelector } from "react-redux";
 import SearchTasksNotFound from "../SearchTasksNotFound/SearchTasksNotFound";
 import BoardCard from "../TaskBoardCard/BoardCard";
+
 const TaskCategory = () => {
   const taskData = useSelector((state) => state.task.task);
   const searchText = useSelector((state) => state.searchText.text);
+  const tabValue = useSelector((state) => state.tab);
+  console.log("cat", tabValue);
 
   const taskTypes = [
     { label: "Todo", id: "todo", color: "#FAC3FF" },
@@ -39,33 +42,50 @@ const TaskCategory = () => {
     filteredTasks["in-progress"].length > 0 ||
     filteredTasks.completed.length > 0;
 
-    console.log(hasResults,"abc")
   return (
     <Grid
       container
-      sx={{ width: "100%", minHeight: !hasResults?"70vh":"0px", alignItems: !hasResults?"center":'' }}
+      sx={{
+        width: "100%",
+        minHeight: !hasResults ? "70vh" : "0px",
+        alignItems: !hasResults ? "center" : "",
+      }}
     >
       {searchText ? (
         hasResults ? (
-          taskTypes.map(
-            (item) =>
-              filteredTasks[item.id].length > 0 && (
-                <Grid item xs={12} key={item.id} >
-                  <AccordionBox
+          tabValue === "list" ? (
+            taskTypes.map(
+              (item) =>
+                filteredTasks[item.id].length > 0 && (
+                  <Grid item xs={12} key={item.id}>
+                    <AccordionBox
+                      item={item}
+                      todo={filteredTasks.todo}
+                      progress={filteredTasks["in-progress"]}
+                      completed={filteredTasks.completed}
+                    />
+                  </Grid>
+                )
+            )
+          ) : (
+            taskTypes.map(
+              (item) =>
+                filteredTasks[item.id].length > 0 && (
+                  <BoardCard
                     item={item}
                     todo={filteredTasks.todo}
                     progress={filteredTasks["in-progress"]}
                     completed={filteredTasks.completed}
                   />
-                </Grid>
-              )
+                )
+            )
           )
         ) : (
           <Grid item xs={12} sm={12} md={12}>
             <SearchTasksNotFound />
           </Grid>
         )
-      ) : (
+      ) : tabValue === "list" ? (
         taskTypes.map((item) => (
           <Grid item xs={12} key={item.id} mb={2}>
             <AccordionBox
@@ -76,6 +96,18 @@ const TaskCategory = () => {
             />
           </Grid>
         ))
+      ) : (
+        taskTypes.map(
+          (item) =>
+            filteredTasks[item.id].length > 0 && (
+              <BoardCard
+                item={item}
+                todo={filteredTasks.todo}
+                progress={filteredTasks["in-progress"]}
+                completed={filteredTasks.completed}
+              />
+            )
+        )
       )}
     </Grid>
   );

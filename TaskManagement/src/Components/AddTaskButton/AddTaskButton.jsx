@@ -8,13 +8,16 @@ import FormLayout from "../FormLayout/FormLayout";
 const AddTaskButton = ({ useIn }) => {
   const isMobile = useMediaQuery("(max-width:800px)");
   const { open, component } = useSelector((state) => state.taskForm);
-  console.log("button",open,component)
+  console.log("button", open, component);
   const dispatch = useDispatch();
 
   return (
     <>
       {/* TODO: (create task) with form Modal */}
-      {open && (component === "filterHeader" || component === "mobileHeader") && <FormLayout />}
+      {open &&
+        (component === "filterHeader" || component === "mobileHeader") && (
+          <FormLayout />
+        )}
 
       {useIn === "filterHeader" || useIn === "mobileHeader" ? (
         <Button
@@ -39,7 +42,17 @@ const AddTaskButton = ({ useIn }) => {
           Add Task
         </Button>
       ) : (
-        <Box sx={{ borderBottom: "1px solid #0000001A" }}>
+        <Box
+          sx={{
+            // border:'3px solid red',
+            position: "sticky",
+            top: 0,
+            zIndex: 10,
+            padding:'10px 0px',
+            backgroundColor:'#F1F1F1',
+            borderBottom: "1px solid #0000001A",
+          }}
+        >
           <Button
             onClick={() => dispatch(openTaskForm("InAccordion"))}
             variant="text"
