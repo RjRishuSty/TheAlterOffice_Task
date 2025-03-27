@@ -1,16 +1,20 @@
-import { Grid } from "@mui/material";
+import { Grid, useMediaQuery } from "@mui/material";
 import React from "react";
 import AccordionBox from "../AccordionBox/AccordionBox";
 import { useSelector } from "react-redux";
 import SearchTasksNotFound from "../SearchTasksNotFound/SearchTasksNotFound";
 import BoardCard from "../TaskBoardCard/BoardCard";
+import AllFilteredTask from "../FilteredTaskShow/AllFilteredTask";
 
 const TaskCategory = () => {
+  const isMobile = useMediaQuery("(max-width:800px)");
+    const miniLaptop = useMediaQuery("(max-width:1270px)");
   const taskData = useSelector((state) => state.task.task);
   const searchText = useSelector((state) => state.searchText.text);
   const tabValue = useSelector((state) => state.tab);
-  console.log("cat", tabValue);
-
+  const filterCategory = useSelector((state) => state.filter.category);
+  const filterDate = useSelector((state) => state.filter.date);
+  console.log("categoryTab", tabValue);
   const taskTypes = [
     { label: "Todo", id: "todo", color: "#FAC3FF" },
     { label: "In-Progress", id: "in-progress", color: "#85D9F1" },
@@ -24,17 +28,44 @@ const TaskCategory = () => {
     completed: taskData.filter((task) => task.status === "completed"),
   };
 
-  // Filter based on search text
+  // Filter based on search text or category and date
   const filteredTasks = {
-    todo: categorizedTasks.todo.filter((task) =>
-      task.title.toLowerCase().includes(searchText.toLowerCase())
-    ),
-    "in-progress": categorizedTasks["in-progress"].filter((task) =>
-      task.title.toLowerCase().includes(searchText.toLowerCase())
-    ),
-    completed: categorizedTasks.completed.filter((task) =>
-      task.title.toLowerCase().includes(searchText.toLowerCase())
-    ),
+    todo: searchText
+      ? categorizedTasks.todo.filter((task) =>
+          task.title.toLowerCase().includes(searchText.toLowerCase())
+        )
+      : filterCategory
+      ? categorizedTasks.todo.filter(
+          (item) => item.category.toLowerCase() === filterCategory.toLowerCase()
+        )
+      : filterDate
+      ? categorizedTasks.todo.filter((item) => item.date === filterDate)
+      : "",
+
+    "in-progress": searchText
+      ? categorizedTasks["in-progress"].filter((task) =>
+          task.title.toLowerCase().includes(searchText.toLowerCase())
+        )
+      : filterCategory
+      ? categorizedTasks["in-progress"].filter(
+          (item) => item.category.toLowerCase() === filterCategory.toLowerCase()
+        )
+      : filterDate
+      ? categorizedTasks["in-progress"].filter(
+          (item) => item.date === filterDate
+        )
+      : "",
+    completed: searchText
+      ? categorizedTasks.completed.filter((task) =>
+          task.title.toLowerCase().includes(searchText.toLowerCase())
+        )
+      : filterCategory
+      ? categorizedTasks.completed.filter(
+          (item) => item.category.toLowerCase() === filterCategory.toLowerCase()
+        )
+      : filterDate
+      ? categorizedTasks.completed.filter((item) => item.date === filterDate)
+      : "",
   };
 
   const hasResults =
@@ -51,40 +82,28 @@ const TaskCategory = () => {
         alignItems: !hasResults ? "center" : "",
       }}
     >
-      {searchText ? (
+      {searchText || filterCategory || filterDate ? (
         hasResults ? (
-          tabValue === "list" ? (
-            taskTypes.map(
-              (item) =>
-                filteredTasks[item.id].length > 0 && (
-                  <Grid item xs={12} key={item.id}>
-                    <AccordionBox
-                      item={item}
-                      todo={filteredTasks.todo}
-                      progress={filteredTasks["in-progress"]}
-                      completed={filteredTasks.completed}
-                    />
-                  </Grid>
-                )
-            )
-          ) : (
-            taskTypes.map(
-              (item) =>
-                filteredTasks[item.id].length > 0 && (
-                  <BoardCard
-                    item={item}
-                    todo={filteredTasks.todo}
-                    progress={filteredTasks["in-progress"]}
-                    completed={filteredTasks.completed}
-                  />
-                )
-            )
-          )
+          <AllFilteredTask
+            taskTypes={taskTypes}
+            filteredTasks={filteredTasks}
+          />
         ) : (
           <Grid item xs={12} sm={12} md={12}>
             <SearchTasksNotFound />
           </Grid>
         )
+      ) : tabValue === "board" ? (
+        taskTypes.map((item) => (
+          <Grid item xs={12} sm={6} md={miniLaptop?4:3} key={item.id} mb={2} sx={{display:isMobile?'none':'flex',justifyContent:'center',alignItems:'center'}} >
+            <BoardCard
+              item={item}
+              todo={categorizedTasks.todo}
+              progress={categorizedTasks["in-progress"]}
+              completed={categorizedTasks.completed}
+            />
+          </Grid>
+        ))
       ) : tabValue === "list" ? (
         taskTypes.map((item) => (
           <Grid item xs={12} key={item.id} mb={2}>
@@ -97,17 +116,7 @@ const TaskCategory = () => {
           </Grid>
         ))
       ) : (
-        taskTypes.map(
-          (item) =>
-            filteredTasks[item.id].length > 0 && (
-              <BoardCard
-                item={item}
-                todo={filteredTasks.todo}
-                progress={filteredTasks["in-progress"]}
-                completed={filteredTasks.completed}
-              />
-            )
-        )
+        ""
       )}
     </Grid>
   );

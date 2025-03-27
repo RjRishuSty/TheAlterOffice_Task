@@ -8,7 +8,6 @@ import FormLayout from "../FormLayout/FormLayout";
 const AddTaskButton = ({ useIn }) => {
   const isMobile = useMediaQuery("(max-width:800px)");
   const { open, component } = useSelector((state) => state.taskForm);
-  console.log("button", open, component);
   const dispatch = useDispatch();
 
   return (

@@ -5,6 +5,7 @@ import taskFormReducer from './Slices/TaskFormSlice';
 import taskReducer from './Slices/TaskSlice';
 import checkedReducer from  './Slices/CheckedTask';
 import searchTextReducer from './Slices/SearchText';
+import filterReducer from './Slices/FilterSlice';
 
 export const Store = configureStore({
   reducer: { 
@@ -14,6 +15,7 @@ export const Store = configureStore({
     task: taskReducer,
     check:checkedReducer,
     searchText:searchTextReducer,
+    filter:filterReducer,
   },
 });
   

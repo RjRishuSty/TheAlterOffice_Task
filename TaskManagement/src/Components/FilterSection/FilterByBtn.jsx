@@ -8,37 +8,52 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useDispatch, useSelector } from "react-redux";
+import { formatDate } from "../FormateDate/FormateDate";
+import {
+  addFilterByCategory,
+  addFilterByDate,
+} from "../../Redux/Slices/FilterSlice";
 
 const FilterByBtn = () => {
   const xSmall = useMediaQuery("(max-width:410px)");
+  const task = useSelector((state) => state.task.task) || [];
+  const dispatch = useDispatch();
+  const [selectedFilters, setSelectedFilters] = useState({
+    category: "",
+    date: "",
+  });
+
   const filters = [
     {
       label: "Category",
       id: "category",
-      options: ["Work", "PERSONAL"],
+      options: ["Work", "Personal"],
     },
     {
       label: "Due Date",
       id: "dueDate",
-      options: ["Today", "This Week", "This Month"],
+      options: [
+        ...new Set(task.map((item) => item.date)),
+      ],
     },
   ];
-
-  const [selectedFilters, setSelectedFilters] = useState({
-    category: "",
-    dueDate: "",
-  });
-
   const handleChange = (event, id) => {
-    setSelectedFilters((prev) => ({ ...prev, [id]: event.target.value }));
-  };
+    const value = event.target.value;
+    setSelectedFilters((prev) => ({ ...prev, [id]: value }));
 
+    if (id === "category") {
+      dispatch(addFilterByCategory(value));
+    } else {
+      dispatch(addFilterByDate(value));
+    }
+  };
   return (
     <Box
       sx={{ width: "100%" }}
       display="flex"
       gap={1}
-      alignItems={xSmall?"start":"center"}
+      alignItems={xSmall ? "start" : "center"}
       flexDirection={xSmall ? "column" : "row"}
     >
       <Typography
@@ -53,13 +68,13 @@ const FilterByBtn = () => {
         Filter by:
       </Typography>
 
-      <Box sx={{  width: "auto", flexWrap: "nowrap" }}>
+      <Box sx={{ width: "auto", flexWrap: "nowrap" }}>
         {filters.map(({ id, label, options }) => (
           <FormControl
             key={id}
             size="small"
             sx={{
-              width: xSmall?"auto":130,
+              width: xSmall ? "auto" : 130,
               borderRadius: "60px",
               backgroundColor: "transparent",
               border: "1px solid #00000033",
@@ -68,11 +83,11 @@ const FilterByBtn = () => {
           >
             <Select
               id={id}
-              value={selectedFilters[id]}
-              onChange={(e) => handleChange(e, id)}
+              value={selectedFilters[id] || ""}
+              onChange={(e) => handleChange(e,id)}
               displayEmpty
               IconComponent={ArrowDropDownIcon}
-              sx={{ color: "#00000099", padding: xSmall?"0px":"0px 10px" }}
+              sx={{ color: "#00000099", padding: xSmall ? "0px" : "0px 10px" }}
             >
               <MenuItem value="" disabled>
                 {label}

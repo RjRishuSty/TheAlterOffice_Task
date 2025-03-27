@@ -128,7 +128,7 @@ const BoardTaskCard = ({ item }) => {
             color="#00000085"
             sx={{ fontSize: 10, fontWeight: 600 }}
           >
-            {formatDate(item.date, item, true)}
+            {item.date}
           </Typography>
         </Box>
       </CardContent>

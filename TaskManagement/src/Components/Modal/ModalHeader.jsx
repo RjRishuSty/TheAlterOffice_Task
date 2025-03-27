@@ -13,7 +13,7 @@ const ModalHeader = ({ selectedTask }) => {
         justifyContent: selectedTask ? "end" : "space-between",
         alignItems: "center",
         backgroundColor: "#FFFFFF",
-        padding: '20px'
+        padding:isMobile?"10px": '20px'
       }}
     >
       {!selectedTask ? (

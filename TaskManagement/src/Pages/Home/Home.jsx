@@ -12,6 +12,7 @@ const Home = () => {
   const isMobile = useMediaQuery("(max-width:800px)");
   const miniLaptop = useMediaQuery("(max-width:1362px)");
   const tabValue = useSelector((state) => state.tab);
+  
 
   return (
     <Stack
@@ -52,7 +53,7 @@ const Home = () => {
       >
         <TaskCategory />
       </Box>
-      {isMobile && checkedTask.length>0&& <MobileFooter />}
+      { checkedTask.length>0&& <MobileFooter />}
     </Stack>
   );
 };

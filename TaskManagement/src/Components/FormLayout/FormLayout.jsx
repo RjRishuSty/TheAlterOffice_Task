@@ -6,6 +6,7 @@ import { Box, Stack } from "@mui/material";
 import FormInAccordion from "./FormInAccordion";
 import Modal from "../Modal/Modal";
 import MobileSizeForm from "../MobileSizeForm/MobileSizeForm";
+import { formatDate } from "../FormateDate/FormateDate";
 
 const FormLayout = () => {
   const selectTask = useSelector((state) => state.task.selectedTask);
@@ -20,7 +21,11 @@ const FormLayout = () => {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const formattedValue =
+      name === "date" ? formatDate(value, "DD-MM-YYYY") : value;
+
+    setFormData({ ...formData, [name]: formattedValue });
   };
 
   const handleSubmit = (e) => {
@@ -31,7 +36,7 @@ const FormLayout = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
     if (selectTask) {
-      dispatch(updateTask({ id: selectTask.id, ...formData })); // ✅ Correct structure
+      dispatch(updateTask({ id: selectTask.id, ...formData })); 
     }
   };
   const { open, component } = useSelector((state) => state.taskForm);

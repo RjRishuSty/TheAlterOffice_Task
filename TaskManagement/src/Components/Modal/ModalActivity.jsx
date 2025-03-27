@@ -5,7 +5,7 @@ import { formatDate } from "../FormateDate/FormateDate";
 
 
 const ModalActivity = ({ selectedTask }) => {
-  console.log("InAcitivity",selectedTask);
+
   if (!selectedTask) return;
 
   const activityLog = [
@@ -27,7 +27,7 @@ const ModalActivity = ({ selectedTask }) => {
     <Stack component='div'
       sx={{
         width: "100%",
-        height: {sm:'70vh',md:"51.7vh"},
+        height: {sm:'70vh',md:"100%"},
         display: "flex",
         justifyContent: "flex-start",
         alignItems: "start",

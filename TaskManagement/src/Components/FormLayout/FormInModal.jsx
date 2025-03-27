@@ -29,7 +29,8 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
   return (
     <Box
       sx={{
-        width: "100%",
+        // border:'2px solid red',
+        width: "100% !important",
         height: isMobile ? "auto" : "auto",
         overflowY: "auto",
       }}
@@ -75,7 +76,7 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
               </Grid>
             ) : null}
             {/* TODO: uppload file image */}
-            {item.type === "file" && (
+            {/* {item.type === "file" && (
               <Box
                 sx={{
                   width: "100%",
@@ -86,7 +87,7 @@ const FormInModal = ({ formData, setFormData, handleChange }) => {
                   mb: 2,
                 }}
               ></Box>
-            )}
+            )} */}
 
             {item.id === "description" && (
               <Grid item xs={12} sm={12} md={12} mb={2}>

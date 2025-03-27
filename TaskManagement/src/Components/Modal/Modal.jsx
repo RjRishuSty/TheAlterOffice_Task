@@ -6,12 +6,12 @@ import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
 import FormInModal from "../FormLayout/FormInModal";
 
-const Modal = ({ formData, setFormData, handleChange, handleUpdate }) => {
+const Modal = ({ formData, setFormData, handleChange }) => {
   const isMobile = useMediaQuery("(max-width:800px)");
   const miniLaptop = useMediaQuery("(max-width:1000px)");
   const formOpen = useSelector((state) => state.taskForm);
   const selectedTask = useSelector((state) => state.task.selectedTask);
-  console.log(selectedTask, "mod");
+  console.log("ModSele",selectedTask);
 
   if (!formOpen) return null;
 
@@ -45,7 +45,11 @@ const Modal = ({ formData, setFormData, handleChange, handleUpdate }) => {
               : miniLaptop
               ? "70%"
               : "50%",
-          height: isMobile ? "auto" : "auto",
+          height: isMobile ? "auto" : "100%",
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center',
+          flexDirection:'column',
           borderRadius: isMobile ? "10px" : "20px",
           overflow: "hidden",
           // paddingBottom:isMobile?'20px':''
@@ -56,7 +60,7 @@ const Modal = ({ formData, setFormData, handleChange, handleUpdate }) => {
           <Grid
             item
             xs={12}
-            sm={8}
+            sm={selectedTask?8:12}
             md={selectedTask ? 8 : 12}
             sx={{
               width: selectedTask && miniLaptop ? "80%" : "100%",
@@ -71,11 +75,11 @@ const Modal = ({ formData, setFormData, handleChange, handleUpdate }) => {
               handleChange={handleChange}
             />
           </Grid>
-          {selectedTask && (
-            <Grid item md={4} sx={{ display: selectedTask ? "block" : "none" }}>
+          {selectedTask ? (
+            <Grid item  md={4} sx={{ display: selectedTask ? "block" : "none" }}>
               <ModalActivity selectedTask={selectedTask} />
             </Grid>
-          )}
+          ):""}
         </Grid>
 
         <ModalFooter selectedTask={selectedTask} />

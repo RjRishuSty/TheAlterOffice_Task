@@ -14,9 +14,9 @@ const CheckInput = ({ item }) => {
         onChange={() => {
           const isChecked = checkedTask.some((task) => task.id === item.id);
           if (isChecked) {
-            dispatch(unChecked({ id: item.id })); // Remove from checked tasks
+            dispatch(unChecked({ id: item.id })); 
           } else {
-            dispatch(addToChecked(item)); // Add to checked tasks
+            dispatch(addToChecked(item)); 
           }
         }}
         size="small"

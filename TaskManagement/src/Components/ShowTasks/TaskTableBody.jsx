@@ -25,6 +25,7 @@ import {
   deleteTask,
 } from "../../Redux/Slices/TaskSlice";
 import CheckInput from "../Inputs/CheckInput";
+import { formatDate } from "../FormateDate/FormateDate";
 
 const TaskTableBody = ({ item }) => {
   const isMobile = useMediaQuery("(max-width:800px)");
@@ -113,6 +114,7 @@ const TaskTableBody = ({ item }) => {
               sx={{
                 textDecoration:
                   item.status === "completed" ? "line-through" : "none",
+                  textTransform:'capitalize'
               }}
             >
               {item.title}
@@ -147,6 +149,7 @@ const TaskTableBody = ({ item }) => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              textTransform: "capitalize",
             }}
           >
             <Typography className={Styles.text}> {item.category}</Typography>
