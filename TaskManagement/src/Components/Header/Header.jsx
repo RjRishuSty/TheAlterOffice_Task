@@ -7,7 +7,7 @@ import TabsComp from "../TabsComp/TabsComp";
 const Header = () => {
   const isMobile = useMediaQuery("(max-width:800px)");
   return (
-    <AppBar position="static" sx={{ mt: isMobile?0:4, padding:isMobile?'15px':'', backgroundColor:isMobile?"#FAEEFC":'white' }}>
+    <AppBar position="static" sx={{ mt: isMobile?0:4, padding:isMobile?'7px':'', backgroundColor:isMobile?"#FAEEFC":'white' }}>
       <Toolbar sx={{ display: "flex",  }}>
         <Box sx={{ flexGrow: 1, }}>
           {/* TODO: Logo Here.......... */}

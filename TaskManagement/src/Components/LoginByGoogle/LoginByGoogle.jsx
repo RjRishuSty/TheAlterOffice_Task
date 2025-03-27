@@ -43,11 +43,11 @@ const LoginByGoogle = () => {
         />
       }
       sx={{
-        width: isMobile?"90%":"70%",
+        width: isMobile?"auto":"auto",
         height:isMobile?"auto":"60px",
         textTransform: "capitalize",
         borderRadius: "18.91px",
-        padding:'10px 5px',
+        padding:isMobile?"15px 35px":"20px 55px",
         backgroundColor: "#292929",
         color: "#FFFFFF",
         fontFamily: '"Urbanist", sans-serif',
