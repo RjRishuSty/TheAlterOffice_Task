@@ -14,7 +14,7 @@ const TaskCategory = () => {
   const tabValue = useSelector((state) => state.tab);
   const filterCategory = useSelector((state) => state.filter.category);
   const filterDate = useSelector((state) => state.filter.date);
-  console.log("categoryTab", tabValue);
+  
   const taskTypes = [
     { label: "Todo", id: "todo", color: "#FAC3FF" },
     { label: "In-Progress", id: "in-progress", color: "#85D9F1" },

@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 const Layout = () => {
   const user = useSelector((state) => state.user);
-  // console.log("LayOutFile:", user);
 
   return (
     <>

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTask, updateTask } from "../../Redux/Slices/TaskSlice";
 import { fields } from "./FormFields";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import FormInAccordion from "./FormInAccordion";
 import Modal from "../Modal/Modal";
-import MobileSizeForm from "../MobileSizeForm/MobileSizeForm";
 import { formatDate } from "../FormateDate/FormateDate";
+import { enqueueSnackbar } from "notistack";
 
 const FormLayout = () => {
   const selectTask = useSelector((state) => state.task.selectedTask);
@@ -30,13 +30,32 @@ const FormLayout = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTask(formData));
+    if (handleValidate()) {
+      dispatch(addTask(formData));
+      enqueueSnackbar('Task Created Successfully!', {variant:'success'});
+    }
+  };
+
+  const handleValidate = () => {
+    if (formData.title === "") {
+      enqueueSnackbar('Title field is required!', {variant:'error'});
+      return false;
+    }
+    if( formData.category === ''){
+      enqueueSnackbar('Category field is required!', {variant:'error'});
+      return false;
+    }
+    if(formData.status === ''){
+      enqueueSnackbar('Status field is required', {variant:'error'})
+      return false;
+    }
+    return true;
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
     if (selectTask) {
-      dispatch(updateTask({ id: selectTask.id, ...formData })); 
+      dispatch(updateTask({ id: selectTask.id, ...formData }));
     }
   };
   const { open, component } = useSelector((state) => state.taskForm);

@@ -5,6 +5,8 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { firebaseApp } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../Redux/Slices/UserSlice";
+import { enqueueSnackbar } from "notistack";
+
 
 const auth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
@@ -24,7 +26,9 @@ const LoginByGoogle = () => {
             "https://t4.ftcdn.net/jpg/08/06/58/03/360_F_806580330_nM9J5dzapvn7hGqEetnMThzp9qZn0HT9.jpg",
         })
       );
+      enqueueSnackbar("Login Successfully",{variant:'success'})
     } catch (error) {
+      enqueueSnackbar("Somethings went wrong",{variant:'error'})
       console.log(error);
     }
   };

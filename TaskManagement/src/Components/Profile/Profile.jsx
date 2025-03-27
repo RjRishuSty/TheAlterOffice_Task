@@ -6,6 +6,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { firebaseApp } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../Redux/Slices/UserSlice";
+import { enqueueSnackbar } from "notistack";
 
 const auth = getAuth(firebaseApp);
 
@@ -20,8 +21,9 @@ const Profile = () => {
     try {
       await signOut(auth);
       dispatch(userLogout());
+      enqueueSnackbar("Logout Successfully", { variant: "info" });
     } catch (error) {
-      console.log(error);
+      enqueueSnackbar("Somethings went wrong", { variant: "error" });
     }
   };
   return (

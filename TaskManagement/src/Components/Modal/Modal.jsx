@@ -11,7 +11,6 @@ const Modal = ({ formData, setFormData, handleChange }) => {
   const miniLaptop = useMediaQuery("(max-width:1000px)");
   const formOpen = useSelector((state) => state.taskForm);
   const selectedTask = useSelector((state) => state.task.selectedTask);
-  console.log("ModSele",selectedTask);
 
   if (!formOpen) return null;
 
