@@ -34,7 +34,7 @@ const Modal = ({ formData, setFormData, handleChange, handleUpdate }) => {
     >
       <Box
         sx={{
-          border: "5px solid black",
+          // border: "5px solid black",
           width:
             selectedTask && miniLaptop
               ? "80%"
@@ -48,7 +48,7 @@ const Modal = ({ formData, setFormData, handleChange, handleUpdate }) => {
           height: isMobile ? "auto" : "auto",
           borderRadius: isMobile ? "10px" : "20px",
           overflow: "hidden",
-          paddingBottom:isMobile?'20px':''
+          // paddingBottom:isMobile?'20px':''
         }}
       >
         <ModalHeader selectedTask={selectedTask} />
