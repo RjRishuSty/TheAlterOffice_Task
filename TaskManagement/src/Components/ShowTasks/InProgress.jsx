@@ -1,4 +1,4 @@
-import { Box, Table, TableBody, Typography } from "@mui/material";
+import { Box, Table, TableBody } from "@mui/material";
 import React from "react";
 import TaskTableBody from "./TaskTableBody";
 import {

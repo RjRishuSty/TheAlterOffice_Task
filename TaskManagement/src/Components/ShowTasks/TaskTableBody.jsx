@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   TableCell,
   TableRow,
-  Checkbox,
   IconButton,
   Menu,
   MenuItem,
@@ -25,7 +24,6 @@ import {
   deleteTask,
 } from "../../Redux/Slices/TaskSlice";
 import CheckInput from "../Inputs/CheckInput";
-import { formatDate } from "../FormateDate/FormateDate";
 
 const TaskTableBody = ({ item }) => {
   const isMobile = useMediaQuery("(max-width:800px)");

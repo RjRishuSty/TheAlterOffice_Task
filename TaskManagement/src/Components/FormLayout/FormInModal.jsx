@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Box, Grid, TextField, Typography, useMediaQuery } from "@mui/material";
 import Styles from "./FormLayout.module.css";
 import { fields } from "./FormFields";
 import TextAreaInput from "../Inputs/TextAreaInput";
 import CheckBoxInput from "../Inputs/CheckBoxInput";
 import SelectInput from "../Inputs/SelectInput";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 const FormInModal = ({ formData, setFormData, handleChange }) => {
   const isMobile = useMediaQuery("(max-width:800px)");

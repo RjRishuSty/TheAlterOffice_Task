@@ -23,7 +23,7 @@ const Modal = ({ formData, setFormData, handleChange }) => {
         top: 0,
         left: 0,
         width: "100%",
-        height:isMobile?"auto": "100vh",
+        height:isMobile?"100vh": "100vh",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         display: "flex",
         justifyContent: isMobile ? "end" : "center",
@@ -33,7 +33,7 @@ const Modal = ({ formData, setFormData, handleChange }) => {
     >
       <Box
         sx={{
-          // border: "5px solid black",
+          border: "5px solid black",
           width:
             selectedTask && miniLaptop
               ? "80%"
@@ -44,7 +44,7 @@ const Modal = ({ formData, setFormData, handleChange }) => {
               : miniLaptop
               ? "70%"
               : "50%",
-          height: isMobile ? "auto" : "100%",
+          height: isMobile ? "90%" : "100%",
           display:'flex',
           justifyContent:'center',
           alignItems:'center',
